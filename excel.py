@@ -56,8 +56,10 @@ class Excel:
         return self.keys
 
     def readRowData(self,rowNum): #获取指定行数 返回格式是字典
-        list_data = self.dict_data(self)
-        return list_data[rowNum]
+        return self.table.row_values(rowNum)
+        #list_data = self.dict_data(self)
+        #return list_data[rowNum]
 
     def readColData(self,colNum): # 获取指定到列数
-        return [str(self.table.cell_value(i, colNum)) for i in range(1, self.table.nrows)]
+        return self.table.col_values(colNum)
+        #return [str(self.table.cell_value(i, colNum)) for i in range(1, self.table.nrows)]
