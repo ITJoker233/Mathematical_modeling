@@ -12,3 +12,5 @@
 ## Windows 安装方式 (打开 CMD 需管理员权限)
 
 > pip install numpy matplotlib xlrd
+
+## Excel.py 封装的api 示例见 sample_excel.py
