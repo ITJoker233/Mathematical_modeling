@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
 # 封装实现读取表格数据
-# 优化了xlrd中单元格的数据类型：
 '''
     数字一律按浮点型输出，日期输出成一串小数，布尔型输出0或1，所以我们必须在程序中做判断处理转换
     成我们想要的数据类型
@@ -22,11 +21,10 @@ class Excel:
         self.rowNum = self.table.nrows # 获取总行数
         self.colNum = self.table.ncols # 获取总列数
  
-    def dict_data(self):
+    def dict_data(self): # 返回到是数组,数组里面是字典格式
         if self.rowNum <= 1:
             print("Total less than 1")
         else:
-            print('keys: {0} \n\n > rowNum: {1} colNum: {2} \n\n'.format(self.keys,self.rowNum,self.colNum))
             r = []
             j = 1 # 第一行
             for i in range(self.rowNum - 1): # 减1防止越界，从第一行开始的，不是从0行开始，所以总数减1
@@ -47,3 +45,19 @@ class Excel:
                 r.append(s)
                 j += 1
             return r
+
+    def getRowNum(self): # 获取总行数
+        return self.rowNum
+
+    def getColNum(self): # 获取总列数
+        return self.colNum
+
+    def getKeys(self): # 获取key值
+        return self.keys
+
+    def readRowData(self,rowNum): #获取指定行数 返回格式是字典
+        list_data = self.dict_data(self)
+        return list_data[rowNum]
+
+    def readColData(self,colNum): # 获取指定到列数
+        return [str(self.table.cell_value(i, colNum)) for i in range(1, self.table.nrows)]
