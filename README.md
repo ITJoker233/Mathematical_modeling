@@ -7,10 +7,8 @@
 
 ## Linux 安装方式
 
->  sudo pip install numpy
->  sudo pip install matplotlib
+>  sudo pip install numpy matplotlib
 
 ## Windows 安装方式 (打开 CMD 需管理员权限)
 
-> pip install numpy
-> pip install matplotlib
+> pip install numpy matplotlib
