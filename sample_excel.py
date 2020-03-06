@@ -1,7 +1,7 @@
-import excel
+from excel import *
 
 if __name__ == '__main__':
-    filename = r'RAW_DATA/吹风机.xlsx'
-    host_sheet, rows = excel.open(filename)
-    host_datas = excel.read(host_sheet, rows)
-    print(host_datas)
+    filePath = r'RAW_DATA/吹风机.xlsx'
+    data = Excel(filePath)
+    # 打印最后信息
+    print(data.dict_data())
