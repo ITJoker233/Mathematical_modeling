@@ -6,7 +6,7 @@ def clearSen(comment):
     return comment.strip().replace('，', '。').replace('、', '').replace('《', '。').replace('》', '。').replace('～', '').replace('…', '').replace('\r', '').replace('\t', ' ').replace('\f', ' ').replace('/', '').replace('、', ' ').replace('/', '').replace('。', '').replace('（', '').replace('）', '').replace('_', '').replace('?', ' ').replace('？', ' ').replace('了', '').replace('➕', '').replace('：', '')
 
 def clearWord(text):
-    return text.replace('button','').replace('microwave','').replace('door','').replace('kitchen','').replace('Amazon','').replace('<br/>','').replace('<br>','').replace('br','').replace('model','')#.replace('model','')
+    return text.replace('button','').replace('microwave','').replace('door','').replace('kitchen','').replace('Amazon','').replace('<br/>','').replace('<br>','').replace('br','').replace('model','').replace('year','').replace('unit','')
 
 def anylyz(sentence):
     VerbNum = AdjNum = NounNum = AdvNum = 0
@@ -16,7 +16,7 @@ def anylyz(sentence):
     wordnet_lematizer = WordNetLemmatizer()
     words = [wordnet_lematizer.lemmatize(raw_word) for raw_word in raw_words]
     # 去除停用词
-    filtered_words = ','.join([word for word in words if word not in stopwords.words('english')])
+    filtered_words = '@'.join([word for word in words if word not in stopwords.words('english')])
     for word, tag in nltk.pos_tag(nltk.word_tokenize(filtered_words)):
         if tag.startswith('NN'):
             NounNum += 1
