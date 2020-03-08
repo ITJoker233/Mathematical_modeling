@@ -4,36 +4,16 @@ import  nltk_api.Lemmatize as Lemmatize
 
 w = wordcloud.WordCloud(max_words=200,width=800,height=400,margin=5,background_color='white')
 
-def IsSubString(SubStrList,Str):
-    flag=True
-    for substr in SubStrList:
-        if not(substr in Str):
-            flag=False
+def getAllPath(dirname):
+    result = []#所有的文件
+    for maindir, subdir, file_name_list in os.walk(dirname):
+        for filename in file_name_list:
+            apath = os.path.join(maindir, filename)#合并成一个完整路径
+            result.append(apath)
+    return result
 
-    return flag
-
-def GetFileList(FindPath,FlagStr=[]):
-    FileList=[]
-    FileNames=os.listdir(FindPath)
-    if (len(FileNames)>0):
-       for fn in FileNames:
-           if (len(FlagStr)>0):
-               #返回指定类型的文件名
-               if (IsSubString(FlagStr,fn)):
-                   fullfilename=os.path.join(FindPath,fn)
-                   FileList.append(fullfilename)
-           else:
-               #默认直接返回所有文件名
-               fullfilename=os.path.join(FindPath,fn)
-               FileList.append(fullfilename)
-    #对文件名排序
-    if (len(FileList)>0):
-        FileList.sort()
-
-    return FileList
-
-def create(filename):
-    excel = Excel('{0}'.format(filename))
+def create(filepath):
+    excel = Excel('{0}'.format(filepath))
     reviews = excel.readColData(13) #列数 从0开始
     sentence_list = ''
     for item in reviews:
@@ -42,9 +22,9 @@ def create(filename):
 
     result_info = 'Adjective Numbers: {0} \nVerb Numbers: {1} \nNoun Numbers: {2} \nAdverb Numbers: {3}'.format(json_obj['Adjective'],json_obj['Verb'],json_obj['Noun'],json_obj['Adverb'])
     #print(result_info)
-    filename = filename.split('\\')[1]
-    filename = filename.replace('SORT_DATA\\\\','')
-    f = open('RESULT\\{0}_wordcloud_result.txt'.format(filename),'w+',encoding='utf-8')
+    filename = filepath.split('\\')[2]
+    save_dirpath = filepath.split('\\')[1]
+    f = open(r'RESULT\{0}\{1}_wordcloud_result.txt'.format(save_dirpath,filename),'w+',encoding='utf-8')
     f.write(result_info)
 
     wordlist = json_obj['WordList']['Adjective']
@@ -53,9 +33,9 @@ def create(filename):
         word_tmp += item+'\n'
     #print(word_tmp)
     w.generate(word_tmp)
-    w.to_file('RESULT\\{0}_wordcloud_result.png'.format(filename))
+    w.to_file(r'RESULT\{0}\{1}_wordcloud_result.png'.format(save_dirpath,filename))
 print('Starting....')
-paths = (GetFileList('SORT_DATA'))
+paths = getAllPath('SORT_DATA')#(GetFileList('SORT_DATA\\'))
 print('Get File List Success!')
 for path in paths:
     old_time = time.time()
