@@ -26,7 +26,7 @@ def create(filepath):
     save_dirpath = filepath.split('\\')[1]
     f = open(r'RESULT\{0}\wordcloud_{1}_result.txt'.format(save_dirpath,filename),'w+',encoding='utf-8')
     f.write(result_info)
-
+    f.close()
     wordlist = json_obj['WordList']['Adjective']
     word_tmp = ''
     for item in wordlist:
