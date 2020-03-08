@@ -24,7 +24,7 @@ def create(filepath):
     #print(result_info)
     filename = filepath.split('\\')[2]
     save_dirpath = filepath.split('\\')[1]
-    f = open(r'RESULT\{0}\{1}_wordcloud_result.txt'.format(save_dirpath,filename),'w+',encoding='utf-8')
+    f = open(r'RESULT\{0}\wordcloud_{1}_result.txt'.format(save_dirpath,filename),'w+',encoding='utf-8')
     f.write(result_info)
 
     wordlist = json_obj['WordList']['Adjective']
@@ -33,7 +33,7 @@ def create(filepath):
         word_tmp += item+'\n'
     #print(word_tmp)
     w.generate(word_tmp)
-    w.to_file(r'RESULT\{0}\{1}_wordcloud_result.png'.format(save_dirpath,filename))
+    w.to_file(r'RESULT\{0}\wordcloud_{1}_result.png'.format(save_dirpath,filename))
 print('Starting....')
 paths = getAllPath('SORT_DATA')#(GetFileList('SORT_DATA\\'))
 print('Get File List Success!')
