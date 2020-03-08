@@ -22,7 +22,7 @@
 
 ## nltk 的相关配置 [配置方法](https://blog.itjoker.cn/post/iCBxLUOlf/)
 
-## nltk_api/Sentiment.py 为文本的情绪分析（只支持英文） 返回的是float
+## nltk_api/Sentiment.py 为文本的情绪分析（只支持英文） 返回的是dict()
 
 ## nltk_api/Lemmatize.py 为文本的词性分析（只支持英文） 返回的数据格式是json
 
