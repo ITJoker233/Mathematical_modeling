@@ -4,7 +4,7 @@
 
 ## 使用 Python 3。x 环境
 
-## 需要的库有 numpy , Matplotlib , xlrd , pyecharts , pandas , nltk , wordcloud
+## 需要的库 有 numpy , Matplotlib , xlrd , pyecharts , pandas , nltk , wordcloud
 
 ## Linux 安装方式
 
