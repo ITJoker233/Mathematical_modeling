@@ -14,11 +14,11 @@
 
 > pip install numpy matplotlib xlrd pyecharts pandas nltk wordcloud
 
-## [pacifier_anylyz_result](https://cdn.itjoker.cn/Mathematical_modeling/pacifier_anylyz_result.html)
+## [在线预览 pacifier_anylyz_result](https://cdn.itjoker.cn/Mathematical_modeling/pacifier_anylyz_result.html)
 
-## [hair_dryer_anylyz_result](https://cdn.itjoker.cn/Mathematical_modeling/hair_dryer_anylyz_result.html)
+## [在线预览 hair_dryer_anylyz_result](https://cdn.itjoker.cn/Mathematical_modeling/hair_dryer_anylyz_result.html)
 
-## [microwave_anylyz_result](https://cdn.itjoker.cn/Mathematical_modeling/microwave_anylyz_result.html)
+## [在线预览 microwave_anylyz_result](https://cdn.itjoker.cn/Mathematical_modeling/microwave_anylyz_result.html)
 
 ## excel.py 封装的api 示例见 sample_excel.py
 
