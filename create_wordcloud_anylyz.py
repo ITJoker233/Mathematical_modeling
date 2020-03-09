@@ -17,7 +17,7 @@ def create(filepath):
     reviews = excel.readColData(13) #列数 从0开始
     sentence_list = ''
     for item in reviews:
-        sentence_list += item + '\n'
+        sentence_list += str(item) + '\n'
     json_obj = json.loads(Lemmatize.anylyz(sentence_list))
 
     result_info = 'Adjective Numbers: {0} \nVerb Numbers: {1} \nNoun Numbers: {2} \nAdverb Numbers: {3}'.format(json_obj['Adjective'],json_obj['Verb'],json_obj['Noun'],json_obj['Adverb'])

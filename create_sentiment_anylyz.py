@@ -16,8 +16,8 @@ def create(filepath):
     kvp = Sentiment.anylyz(reviews)
     filename = filepath.split('\\')[2]
     save_dirpath = filepath.split('\\')[1]
-    f = open(r'RESULT\{0}\sentiment_{1}_result.json'.format(save_dirpath,filename),'w+',encoding='utf-8')
-    f.write(json.dumps(kvp))
+    with open(r'RESULT\{0}\sentiment_{1}_result.json'.format(save_dirpath,filename),"w") as f:
+        json.dump(kvp,f)
     f.close()
     print('Sentiment Rank: {0}'.format(kvp['sum']))
 print('Starting....')
