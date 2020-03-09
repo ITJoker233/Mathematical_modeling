@@ -37,7 +37,7 @@ filepaths = getAllPath('RESULT')
 pattern = '.*?json'
 pattern_1 = 'sentiment_hair_dryer_(.*?).xlsx_result.json'
 pattern_2 = 'sentiment_microwave_(.*?).xlsx_result.json'
-pattern_3 = 'sentiment_nipple_bottle_(.*?).xlsx_result.json'
+pattern_3 = 'sentiment_pacifier_(.*?).xlsx_result.json'
 anylyz_list = {'hair_dryer':[],'pacifier':[],'microwave':[]}
 anylyz_name_list = {'hair_dryer':[],'pacifier':[],'microwave':[]}
 for filepath in filepaths:
