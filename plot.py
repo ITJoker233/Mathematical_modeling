@@ -24,7 +24,7 @@ def create(anylyz_list,anylyz_name,anylyz_type):
         x.append(anylyz_name)
         json_data = readfile(anylyz_list[i])
         json_obj = json.loads(json_data)
-        data.append(json_obj['sum'])
+        data.append(round(json_obj['sum'],2))
     bar = ( 
         Bar()
         .add_xaxis(x)
@@ -35,6 +35,9 @@ def create(anylyz_list,anylyz_name,anylyz_type):
 
 filepaths = getAllPath('RESULT')
 pattern = '.*?json'
+pattern_1 = 'sentiment_hair_dryer_(.*?).xlsx_result.json'
+pattern_2 = 'sentiment_microwave_(.*?).xlsx_result.json'
+pattern_3 = 'sentiment_nipple_bottle_(.*?).xlsx_result.json'
 anylyz_list = {'hair_dryer':[],'pacifier':[],'microwave':[]}
 anylyz_name_list = {'hair_dryer':[],'pacifier':[],'microwave':[]}
 for filepath in filepaths:
@@ -42,14 +45,14 @@ for filepath in filepaths:
     anylyz_type = filepath.split('\\')[1]
     if(re.match(pattern,filename)):
         if(anylyz_type == 'hair_dryer'):
-            anylyz_name_list['hair_dryer'].append(filename)
+            anylyz_name_list['hair_dryer'].append(re.findall(pattern_1,filename)[0])
             anylyz_list['hair_dryer'].append(filepath)
-        elif(anylyz_type == 'pacifier'):
-            anylyz_name_list['pacifier'].append(filename)
-            anylyz_list['pacifier'].append(filepath)
         elif(anylyz_type == 'microwave'):
-            anylyz_name_list['microwave'].append(filename)
+            anylyz_name_list['microwave'].append(re.findall(pattern_2,filename)[0])
             anylyz_list['microwave'].append(filepath)
+        elif(anylyz_type == 'pacifier'):
+            anylyz_name_list['pacifier'].append(re.findall(pattern_3,filename)[0])
+            anylyz_list['pacifier'].append(filepath)
 print('Creating hair_dryer Result...')
 create(anylyz_list['hair_dryer'],anylyz_name_list['hair_dryer'],'hair_dryer')
 print('Creating pacifier Result...')
