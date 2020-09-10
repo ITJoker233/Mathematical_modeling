@@ -1,4 +1,0 @@
-Adjective Numbers: 1025 
-Verb Numbers: 1217 
-Noun Numbers: 2195 
-Adverb Numbers: 512
