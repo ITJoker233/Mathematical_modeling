@@ -72,11 +72,13 @@ def getDirFilePathList(dirname):
 if __name__ == "__main__":
     read_base_path='RAW_DATA/'
     save_base_path='RESULT/' 
-    file_name = '第一季度_宿舍.xlsx'
+    quarter = '第一季度'
+    file_name = f'{quarter}_宿舍.xlsx'
     read_file_path = f'{read_base_path}{file_name}'
-    save_file_path = f'{save_base_path}the_first_quarter/'# 存储到第一季度目录下
+    save_file_path = f'{save_base_path}{quarter}/'# 存储到第一季度目录下
     createDict(read_file_path,save_file_path)
     filePaths = getDirFilePathList(save_file_path)
+    '''每个宿舍的各个时间段用水情况分析'''
     for filePath in filePaths:
         if filePath != '' and filePath.endswith('json'):
             json_obj = json.loads(readFile(filePath))
@@ -84,3 +86,11 @@ if __name__ == "__main__":
             dates = json_obj['date']
             print(f'Starting {filePath}')
             createChart(data,dates,f'{json_obj["name"]}_用水情况',save_file_path)
+    '''每个宿舍的总用水量情况分析'''
+    sums = []
+    names = []
+    for filePath in filePaths:
+        if filePath != '' and filePath.endswith('json'):
+            names.append(re.findall(r'/XXX(.*?)\.',filePath)[0])
+            sums.append(json.loads(readFile(filePath))['sum'])
+    createChart(sums,names,f'{quarter}_宿舍_用水量情况',save_file_path)
