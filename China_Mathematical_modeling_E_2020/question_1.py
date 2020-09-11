@@ -28,7 +28,9 @@ def createChart(analyse_data,x_coordinate_names,y_coordinate_name,save_file_path
 
 '''建立对应的每个宿舍的用水量字典文件'''
 def createDict(read_file_path,save_file_path):
+    print('Opening Excel')
     excel = Excel(read_file_path)
+    print('Starting Create Dict')
     excel_dicts = excel.dict_data()
     water_meter_name = excel_dicts[0]['水表名'] # 默认设置为第一行的第一个水表名
     object_dict = {
@@ -91,6 +93,6 @@ if __name__ == "__main__":
     names = []
     for filePath in filePaths:
         if filePath != '' and filePath.endswith('json'):
-            names.append(re.findall(r'/XXX(.*?)\.',filePath)[0])
+            names.append(re.findall(r'/(.*?)\.',filePath)[0])
             sums.append(json.loads(readFile(filePath))['sum'])
     createChart(sums,names,f'{quarter}_宿舍_用水量情况',save_file_path)
