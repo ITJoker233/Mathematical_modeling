@@ -74,7 +74,7 @@ def getDirFilePathList(dirname):
 if __name__ == "__main__":
     oldTime = time.time()
     chinese_nums = ['一','二','三','四']
-    read_base_path='RAW_DATA/'
+    read_base_path='RAW_DATA/question_1/'
     save_base_path='RESULT/'
     manage_keywords = ['宿舍','食堂','厕所','教学楼','办公楼','其他']#'宿舍','食堂','厕所','教学楼','办公楼','其他'
     for manage_keyword  in manage_keywords:
