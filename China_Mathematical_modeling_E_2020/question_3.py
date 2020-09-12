@@ -67,12 +67,14 @@ def createDict(read_file_path,save_file_path,save_file_name):
     print('Create Dict Success!')
 
 if __name__ == '__main__':
+    old_time = time.time()
     read_base_path='RAW_DATA/question_3/'
     save_file_path = 'RESULT/question_3/'
-    #files= getDirFilePathList(read_base_path)
-    #for file in files:
-    #    file_name = re.findall(r'3/(.*?)\.',file)[0]
-    #    createDict(file,save_file_path,file_name)
+    files= getDirFilePathList(read_base_path)
+    for file in files:
+        if file.endswith('xlsx'):
+            file_name = re.findall(r'3/(.*?)\.',file)[0]
+            createDict(file,save_file_path,file_name)
     files= getDirFilePathList(save_file_path)
     for file in files:
         if file.endswith('json'):
@@ -87,7 +89,7 @@ if __name__ == '__main__':
                         flag = False
                         writer.writerow([date,json_obj['date'][date],json_obj['total'],json_obj['average']])
                     writer.writerow([date,json_obj['date'][date]])
-            
+    print(f'用时:{str(int(time.time()-old_time))}s')
     '''
     for file in files:
         y_data = []
