@@ -1,5 +1,6 @@
 from excel import *
 from utils import *
+import csv
 import json,os,os.path,time,re
 from pyecharts.charts import *
 from pyecharts import options as opts
@@ -42,7 +43,7 @@ def createDict(read_file_path,save_file_path,save_file_name):
     print('Starting Create Dict')
     excel_dicts = excel.dict_data()
     water_meter_name = excel_dicts[0]['水表名'].replace('\t','').replace('+','') # 默认设置为第一行的第一个水表名
-    cmp_date = time.strftime("%Y-%m-%d", time.strptime(excel_dicts[0]['采集时间'], '%Y/%m/%d %H:%M:%S'))
+    cmp_date = time.strftime('%Y-%m-%d', time.strptime(excel_dicts[0]['采集时间'], '%Y/%m/%d %H:%M:%S'))
     object_dict = {
         'date':{},
         'total':0,
@@ -50,13 +51,13 @@ def createDict(read_file_path,save_file_path,save_file_name):
     }
     for dict_ in excel_dicts:
         object_dict['total'] += dict_['用量']
-        if cmp_date == time.strftime("%Y-%m-%d", time.strptime(dict_['采集时间'], '%Y/%m/%d %H:%M:%S')):
+        if cmp_date == time.strftime('%Y-%m-%d', time.strptime(dict_['采集时间'], '%Y/%m/%d %H:%M:%S')):
             if cmp_date in object_dict['date']:
                 object_dict['date'][cmp_date] += dict_['用量']
             else:
                 object_dict['date'][cmp_date] = dict_['用量']
         else:
-            cmp_date = time.strftime("%Y-%m-%d", time.strptime(dict_['采集时间'], '%Y/%m/%d %H:%M:%S'))
+            cmp_date = time.strftime('%Y-%m-%d', time.strptime(dict_['采集时间'], '%Y/%m/%d %H:%M:%S'))
             if cmp_date in object_dict['date']:
                 object_dict['date'][cmp_date] += dict_['用量']
             else:
@@ -65,14 +66,29 @@ def createDict(read_file_path,save_file_path,save_file_name):
     writeFile(save_file_path+save_file_name+water_meter_name+'.json',json.dumps(object_dict))
     print('Create Dict Success!')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     read_base_path='RAW_DATA/question_3/'
     save_file_path = 'RESULT/question_3/'
-    files= getDirFilePathList(read_base_path)
-    for file in files:
-        file_name = re.findall(r'3/(.*?)\.',file)[0]
-        createDict(file,save_file_path,file_name)
+    #files= getDirFilePathList(read_base_path)
+    #for file in files:
+    #    file_name = re.findall(r'3/(.*?)\.',file)[0]
+    #    createDict(file,save_file_path,file_name)
     files= getDirFilePathList(save_file_path)
+    for file in files:
+        if file.endswith('json'):
+            save_name = re.findall(r'3/(.*?)\.',file)[0]+'(天)用水量'
+            json_obj = json.loads(readFile(file))
+            with open(f'{save_file_path}{save_name}.csv','w') as csvfile: 
+                writer = csv.writer(csvfile)
+                writer.writerow(['日期','（天）用水量','总量','平均'])
+                flag = True
+                for date in json_obj['date']:
+                    if flag:
+                        flag = False
+                        writer.writerow([date,json_obj['date'][date],json_obj['total'],json_obj['average']])
+                    writer.writerow([date,json_obj['date'][date]])
+            
+    '''
     for file in files:
         y_data = []
         x_name = []
@@ -86,3 +102,4 @@ if __name__ == "__main__":
         y_data.append(json_obj['total'])
         x_name.append('total')
         createChart(y_data,x_name,y_name,save_file_path)
+    '''
