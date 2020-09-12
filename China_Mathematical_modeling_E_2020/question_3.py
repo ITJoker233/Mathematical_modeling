@@ -38,7 +38,7 @@ def getDirFilePathList(dirname):
 
 '''建立对应的每个宿舍的用水量字典文件'''
 def createDict(read_file_path,save_file_path,save_file_name):
-    print('Opening Excel')
+    print(f'Opening Excel {read_file_path}')
     excel = Excel(read_file_path)
     print('Starting Create Dict')
     excel_dicts = excel.dict_data()

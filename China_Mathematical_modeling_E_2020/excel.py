@@ -38,7 +38,7 @@ class Excel:
                         values[x] = int(values[x])
                     elif c_type == 3: # 日期
                         date = datetime.datetime(*xldate_as_tuple(c_cell, 0)) # 转成datetime对象
-                        values[x] = date.strftime('%Y/%d/%m %H:%M:%S')
+                        values[x] = date.strftime('%Y/%m/%d %H:%M:%S')
                     elif c_type == 4: # 布尔类型
                         values[x] = True if c_cell == 1 else False
                     s[self.keys[x]] = values[x]
