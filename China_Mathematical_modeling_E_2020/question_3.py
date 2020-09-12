@@ -50,6 +50,7 @@ def createDict(read_file_path,save_file_path,save_file_name):
         'average':0.0
     }
     for dict_ in excel_dicts:
+        dict_['用量'] = float(dict_['用量'])
         object_dict['total'] += dict_['用量']
         if cmp_date == time.strftime('%Y-%m-%d', time.strptime(dict_['采集时间'], '%Y/%m/%d %H:%M:%S')):
             if cmp_date in object_dict['date']:
